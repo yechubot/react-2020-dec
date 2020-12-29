@@ -1,11 +1,15 @@
 const Navbar = () => {//sfc -- stateless function 
-    return ( 
+    return (
         <nav className="navbar">
             <h1>The Dojo Blog</h1>
-            <a href="/">Home</a>
-            <a href="/create">New Blog</a>
+            <div className="links">
+                <a href="/">Home</a>
+                <a href="/create" >New Blog</a>
+            </div>
+
+         
         </nav>
-     );
+    );
 }
- 
+
 export default Navbar;
