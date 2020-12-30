@@ -1,23 +1,24 @@
+import { useState } from 'react';
+//useState hook을 사용하여 리액트가  state 변동하면 렌더링 할 수 있게..?
+//reactive value가 필요하면 이를 사용함 
 const Home = () => {
-
-    const handleClick = (e) => {//기본으로 이벤트를 첫번쨰 argument로 받음 
-        console.log('hello, ninjas', e);
+    //let name = 'mario';
+    const [name, setName] = useState('mario');
+    const[age, setAge] = useState(25); //initial value
+    //value, setFunction 
+    const handleClick = () => {
+        setName('luigi');
+        setAge('30');
     }
 
-    const handleClickAgain = (name,e) => { // parameter: name 
-        console.log('hello '+ name, e.target);
-    }
-
-    return ( 
+    return (
         <div className="home">
             <h2>Homepage</h2>
+            <p>{name} is {age} years old </p>
+            
             <button onClick={handleClick}>Click me</button>
-            {/* handleClick() 은 바로 invoke 하는거, reference만 달면 됨 */}
-            <button onClick={(e) => {// 유저가 클릭시 fire 되는 function - 익명함수를 만들었어..?
-            handleClickAgain('mario',e);// 한줄이라 {}생략가능 
-            // 바로 invoke 안되는 이유는 클릭시 function이 fire되기 때문에 
-            }}>Click me again</button>
-       </div>
-     );
-    }
+
+        </div>
+    );
+}
 export default Home;
