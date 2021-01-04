@@ -1,19 +1,21 @@
 import { useState } from 'react';
 import BlogList from './BlogList';
 
-const Home = () => {// parent component
+const Home = () => {
     const [blogs, setBlogs] = useState([
     {title:'my mew website', body: 'lorem ipsum...', author:'mario', id:1},
-    {title:'welcome party', body: 'lorem ipsum...', author:'yechu', id:2},
+    {title:'welcome party', body: 'lorem ipsum...', author:'mario', id:2},
     {title:'my web dev top tips', body: 'lorem ipsum...', author:'ninja', id:3}
     ]);
-    //컴포넌트를 만들면 필요할 때 만들어 놓은 걸 사용할 수 있다. --resusable 
-    //Props form을 사용하면 된다.
-    //만든 컴포넌트를 원하는 곳에 넣어 사용함
-    return ( // bloglist -- child component
-        //blogs(원하는 이름 주고) = {blogs} --> prop 임 
+   
+    return ( 
         <div className="home">
             <BlogList blogs = {blogs} title = "All Blogs !"/>
+            <BlogList blogs = {blogs.filter((blog)=> 
+                //filter메소드를 사용하여 mario가 저자인것 만 빼기
+                //true 면 그대로 두고, false는 필터하는 원리
+                blog.author ==='mario' // true, false, false 가 되어 new array로 나오는 것 
+            ) } title = "Mario's blogs!"/>
         </div>
     );
     }
