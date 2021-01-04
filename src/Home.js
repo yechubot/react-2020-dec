@@ -1,21 +1,19 @@
 import { useState } from 'react';
+import BlogList from './BlogList';
 
-const Home = () => {
+const Home = () => {// parent component
     const [blogs, setBlogs] = useState([
     {title:'my mew website', body: 'lorem ipsum...', author:'mario', id:1},
     {title:'welcome party', body: 'lorem ipsum...', author:'yechu', id:2},
     {title:'my web dev top tips', body: 'lorem ipsum...', author:'ninja', id:3}
     ]);
-    
-    return (
+    //컴포넌트를 만들면 필요할 때 만들어 놓은 걸 사용할 수 있다. --resusable 
+    //Props form을 사용하면 된다.
+    //만든 컴포넌트를 원하는 곳에 넣어 사용함
+    return ( // bloglist -- child component
+        //blogs(원하는 이름 주고) = {blogs} --> prop 임 
         <div className="home">
-            {blogs.map((blog)=> (//map으로 할때 해당 아이템은 key property꼭 있어야 한다
-            //그리고 키는 유니크해야함 
-                <div className="blog-preview" key ={blog.id}>
-                    <h2>{blog.title}</h2>
-                <p>Written by {blog.author}</p>
-                </div>
-            ))}
+            <BlogList blogs = {blogs} title = "All Blogs !"/>
         </div>
     );
     }
