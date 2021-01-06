@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import BlogList from './BlogList';
 
 const Home = () => {
@@ -8,17 +8,23 @@ const Home = () => {
     {title:'my web dev top tips', body: 'lorem ipsum...', author:'ninja', id:3}
     ]);
 
-    const handleDelete = (id)=> {// 여기 아이디랑 
-        //setBlog함수를 사용하여..
-         const newBlogs = blogs.filter(blog => blog.id !== id) // 여기 아이디가 매치하면 false가 되서 필터되는 원리 
-         // filter method new array를 리턴한다. 오리지널은 안바뀜 
+    const handleDelete = (id)=> {
+         const newBlogs = blogs.filter(blog => blog.id !== id) 
             setBlogs(newBlogs);
         }
+
+    //렌더링 될때마다 실행되는 함수 
+    //즉 데이터 바뀔때마다 계속 실행됨 (run every render!!! )
+    useEffect(()=> {
+        console.log('use effect ran');
+        console.log(blogs);
+    });
+    // useEffect -> useState -> rerender -> useEffect ->  continuous loop ...
+
     return ( 
         <div className="home">
             <BlogList blogs = {blogs} title = "All Blogs !" handleDelete={handleDelete}/>
-            <BlogList blogs = {blogs.filter((blog)=>blog.author ==='mario' ) } title = "Mario's blogs!" handleDelete={handleDelete}/>
-        </div>
+       </div>
     );
     }
 
