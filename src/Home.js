@@ -7,15 +7,17 @@ const Home = () => {
     {title:'welcome party', body: 'lorem ipsum...', author:'mario', id:2},
     {title:'my web dev top tips', body: 'lorem ipsum...', author:'ninja', id:3}
     ]);
-   
+
+    const handleDelete = (id)=> {// 여기 아이디랑 
+        //setBlog함수를 사용하여..
+         const newBlogs = blogs.filter(blog => blog.id !== id) // 여기 아이디가 매치하면 false가 되서 필터되는 원리 
+         // filter method new array를 리턴한다. 오리지널은 안바뀜 
+            setBlogs(newBlogs);
+        }
     return ( 
         <div className="home">
-            <BlogList blogs = {blogs} title = "All Blogs !"/>
-            <BlogList blogs = {blogs.filter((blog)=> 
-                //filter메소드를 사용하여 mario가 저자인것 만 빼기
-                //true 면 그대로 두고, false는 필터하는 원리
-                blog.author ==='mario' // true, false, false 가 되어 new array로 나오는 것 
-            ) } title = "Mario's blogs!"/>
+            <BlogList blogs = {blogs} title = "All Blogs !" handleDelete={handleDelete}/>
+            <BlogList blogs = {blogs.filter((blog)=>blog.author ==='mario' ) } title = "Mario's blogs!" handleDelete={handleDelete}/>
         </div>
     );
     }
