@@ -1,0 +1,18 @@
+{
+    "blogs":[ 
+        
+        {
+            "title": "My first Blog",
+            "body": "why do you use it? ",
+            "author": "mario",
+            "id":1
+        },
+        {
+            "title": "Welcome party ",
+            "body": "why do you use it? ",
+            "author": "yoshi",
+            "id":2
+        }
+
+    ]
+}

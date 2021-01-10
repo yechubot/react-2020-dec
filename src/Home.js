@@ -2,36 +2,26 @@ import { useState, useEffect} from 'react';
 import BlogList from './BlogList';
 
 const Home = () => {
-    const [blogs, setBlogs] = useState([
-    {title:'my mew website', body: 'lorem ipsum...', author:'mario', id:1},
-    {title:'welcome party', body: 'lorem ipsum...', author:'mario', id:2},
-    {title:'my web dev top tips', body: 'lorem ipsum...', author:'ninja', id:3}
-    ]);
+    const [blogs, setBlogs] = useState(null); //fetch data 가 성공적으로 되면 업뎃할 것임 
 
-    const handleDelete = (id)=> {
-         const newBlogs = blogs.filter(blog => blog.id !== id) 
-            setBlogs(newBlogs);
-        }
-
-    const[name, setName] = useState('mario');
-    //렌더링 될때마다 실행되는 함수 
-    //즉 데이터 바뀔때마다 계속 실행됨 (run every render!!! )
     useEffect(()=> {
-        console.log('use effect ran');
-        //console.log(blogs);
-        console.log(name);
-    },name);
-    // useEffect -> useState -> rerender -> useEffect ->  continuous loop ...
-    //렌더될떄마다 실행되지 않고, 특정할 떄만 실행되게 하려면 dependency array 라는 걸 사용하면 된다.
-    // 두번쨰 인자로 []empty array를 넣어주면 처음에만 useEffect가 실행된다.
-    // 특정 데이터가 변할 때만 콜하고 싶다면, 그 데이터를 넘겨주면 된다.
+        fetch('http://localhost:8000/blogs')
+        .then(res=> {
+           return res.json()
+        }) // data를 받고 나면 then() 실행됨. res는 데이터임 (response object)
+        .then((data)=> {// 그리고 나서 실행되게 then() 메소드
+            setBlogs(data);
+        })
+    },[]);
 
     return ( 
         <div className="home">
-            <BlogList blogs = {blogs} title = "All Blogs !" handleDelete={handleDelete}/>
-            <button onClick={()=> setName('luigi')}>Change name</button>
-            <p>{name}</p>
+            {blogs && <BlogList blogs = {blogs} title = "All Blogs !"/>}
        </div>
+    // BlogList에 blogs를 넘기고 BlogList.js에서는 처음에 실행할 때는 null을 받아버림
+    //그러면 data를 읽어온다음에 넘겨야 하는데 여기서 자바 스크립트를 이용한다.
+    //자바 스크립트를 이용하기 위해서 {} 를 써주고 안에 blogs &&를 넣어주어 조건문을 표현한다.
+    //위의 의미는 왼쪽이 false면 오른쪽을 표시하지 않는다. 하지만 true 면 output된다.
     );
     }
 
