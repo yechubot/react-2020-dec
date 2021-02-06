@@ -38,7 +38,6 @@ const useFetch = (url) => { // 나중에도 쓰기위해 이름을 바꿈 blogs 
         //home -> add a new blog -> home -> add a new blog 클릭시
         // useFetch 할수 없다고 나온다. home에있는 걸 가져오려고 하기 때문에... 
         // 이를 clean up? 
-
         return () =>abortCont.abort(); //연결된 fetch가 pause됨 
     },[url]);
 
